@@ -5,20 +5,20 @@ import os
 # def say(text):
 #     os.system(f"""say "{text}" """)
 
-# def say(text):
-#     import pyttsx3
-#     engine = pyttsx3.init(driverName='nsss') 
-#     # engine.setProperty('voice', 'com.apple.voice.compact.it-IT.Alice') 
-#     engine.setProperty('rate', 200)  # Adjust the speech rate (words per minute)
-#     engine.say(text)
-#     engine.runAndWait()
-
 def say(text):
-    from gtts import gTTS
-    tts = gTTS(text=text, lang='en', slow=False, tld='co.in')
-    tts.save("FridayReplies/output.mp3")
-    os.system("mpg123 FridayReplies/output.mp3")
-    # os.remove("output.mp3")
+    print("OpenAI tts is being called.")
+    from pathlib import Path
+    from openai import OpenAI
+    from IPython.display import Audio
+    client = OpenAI()
+    speech_file_path = "FridayResponses/speech.mp3"
+    response = client.audio.speech.create(
+    model="tts-1",
+    voice="alloy",
+    input=text
+    )
+    response.stream_to_file(speech_file_path)
+    os.system(f"mpg123 {speech_file_path}")
 
 def speechToText():
     r = sr.Recognizer()

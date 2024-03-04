@@ -1,7 +1,8 @@
 *.DS_Store
 *.env
-FridayReplies/output.mp3
+FridayResponses/speech.mp3
 /interviewerAI/
 /FridayReplies/
+/FridayResponses/
 /InterviewExperience/
 voices.txt
